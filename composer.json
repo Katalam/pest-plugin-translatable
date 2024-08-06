@@ -1,6 +1,6 @@
 {
     "name": "katalam/pest-plugin-translatable",
-    "description": "My awesome plugin",
+    "description": "A Pest plugin to test the existence of translations.",
     "keywords": [
         "php",
         "framework",
