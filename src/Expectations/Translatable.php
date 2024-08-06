@@ -16,12 +16,15 @@ expect()->extend('toHaveNoEmptyTranslatable', fn (string|array $languages): Arch
 
         $translationKeys = data_get($matches, 'translation', '') ?? '';
 
+        assert(is_array($translationKeys), 'No translation keys found in the file.');
+
         if (is_string($languages)) {
             $languages = [$languages];
         }
 
         foreach ($translationKeys as $translationKey) {
             foreach ($languages as $language) {
+                // @phpstan-ignore-next-line
                 if (! app('translator')->has($translationKey, $language, false)) {
                     $match = $translationKey;
 
