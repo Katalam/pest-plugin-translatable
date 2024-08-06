@@ -12,5 +12,6 @@ coverage.xml
 .phpunit.cache
 workbench/bootstrap/cache/*
 !workbench/bootstrap/cache/.gitkeep
+!workbench/storage/framework/views/.gitkeep
 workbench/storage
 workbench/vendor
