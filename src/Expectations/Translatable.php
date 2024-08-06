@@ -7,19 +7,26 @@ use Pest\Arch\Expectations\Targeted;
 use Pest\Arch\Support\FileLineFinder;
 use PHPUnit\Architecture\Elements\ObjectDescription;
 
-expect()->extend('toHaveNoEmptyTranslatable', fn (): ArchExpectation => Targeted::make(
+expect()->extend('toHaveNoEmptyTranslatable', fn (string|array $languages): ArchExpectation => Targeted::make(
     $this,
-    function (ObjectDescription $object) use (&$match): bool {
+    static function (ObjectDescription $object) use (&$match, $languages): bool {
         $fileContents = (string) file_get_contents($object->path);
 
         preg_match_all('/(__|trans)\([\'"](?<translation>.+)[\'"]\)/i', $fileContents, $matches);
 
         $translationKeys = data_get($matches, 'translation', '') ?? '';
 
+        if (is_string($languages)) {
+            $languages = [$languages];
+        }
+
         foreach ($translationKeys as $translationKey) {
-            if (! app('translator')->has($translationKey)) {
-                $match = $translationKey;
-                return false;
+            foreach ($languages as $language) {
+                if (! app('translator')->has($translationKey, $language, false)) {
+                    $match = $translationKey;
+
+                    return false;
+                }
             }
         }
 

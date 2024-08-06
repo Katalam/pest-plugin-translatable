@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-class HasNoEmptyTranslatable
+class HasEmptyTranslatable1
 {
     public function __construct() {}
 
     public function getString(): string
     {
-        return __('test.string');
+        return __('test.abc');
     }
 
     public function getSecondString(): string
     {
-        return __('test.string2');
+        return __('test.abc2');
     }
 }
