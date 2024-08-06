@@ -11,6 +11,8 @@ jobs:
         php: ['8.1', '8.2', '8.3']
         dependency-version: [prefer-lowest, prefer-stable]
         parallel: ['', '--parallel']
+        include:
+          - pest: ^2.9
 
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }} - ${{ matrix.parallel }}
 
@@ -31,7 +33,9 @@ jobs:
         echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
     - name: Install PHP dependencies
-      run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress --ansi
+      run: |
+        composer require "pestphp/pest:${{ matrix.pest }}"
+        composer update --${{ matrix.dependency-version }} --no-interaction --no-progress --ansi
 
     - name: Unit Tests
       run: composer test:unit
