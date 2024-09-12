@@ -13,8 +13,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "pestphp/pest": "^2.5",
-        "pestphp/pest-plugin": "^2.0.1",
+        "pestphp/pest": "^v3.0.6",
+        "pestphp/pest-plugin": "^v3.0.0",
         "laravel/framework": "^10.48.9|^11.5.0"
     },
     "autoload": {
@@ -34,7 +34,7 @@
         }
     },
     "require-dev": {
-        "pestphp/pest-dev-tools": "^2.9",
+        "pestphp/pest-dev-tools": "^v3.0.0",
         "orchestra/testbench": "^8.22.3|^9.0.4"
     },
     "minimum-stability": "dev",
